@@ -12,7 +12,10 @@ const server=http.createServer((req,res)=>{
         res.writeHead(200,{'content-type':'text/plain'})
         res.end('This is a about us page')
     }
-    
+    else{
+        res.writeHead(404,{'content-type':'text/plain'})
+        res.end('404 Not Found')
+    }
 })
 
 // your computer port
