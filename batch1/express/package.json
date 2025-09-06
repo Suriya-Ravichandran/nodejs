@@ -9,6 +9,8 @@
   "author": "Suriya Ravichandran",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
   }
 }

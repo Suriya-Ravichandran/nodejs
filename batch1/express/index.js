@@ -1,18 +1,37 @@
 const express = require("express")
+const connectDB = require("./db")
+const Product = require("./models/Product")
+const bodyParser=require("body-parser")
+
+// create express app
 const app = express()
+app.use(bodyParser.json())
+// database connections 
+connectDB()
 
 
-app.use((req,res)=>{
-    console.log(req.url)
-    req.next()
+// create routes
+
+// create product
+app.post("/api/product",async (req,res)=>{
+    const data = req.body
+    try{
+        const product = new Product(data)
+        await product.save()
+        res.status(201).json(product)
+    }catch (err){
+        res.status(500).json({"Error": err.message})
+    }
 })
 
-app.get("/",(req,res)=>{
-    res.status(200).send("Hello world")
-})
-
-app.post("/",(req,res)=>{
-    res.status(201).send("This is a post resquest")
+// Get all products
+app.get("/api/product",async (req,res)=>{
+    try{
+        const product = await Product.find()
+        res.status(200).json(product)
+    }catch (err){
+        res.status(500)
+    }
 })
 
 
